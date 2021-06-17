@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ItemRepository extends JpaRepository<Item, Long> { // difference between JPA and CRUD?
+public interface ItemRepository extends JpaRepository<Item, Long> {
 }

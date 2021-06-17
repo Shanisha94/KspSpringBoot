@@ -1,5 +1,6 @@
 package com.ksp.demo.controller;
 
+import com.ksp.demo.exception.OutOfStokException;
 import com.ksp.demo.model.Item;
 import com.ksp.demo.service.IItemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,4 +75,13 @@ public class KspController {
         }
     }
 
+    @GetMapping("/buy/{itemid}/{amount}")
+    private ResponseEntity<String> buyItem(@PathVariable("itemid") long itemid, @PathVariable("amount") int amount){
+        try {
+            Item item = itemsService.buyItem(itemid, amount);
+            return new ResponseEntity<>(String.format("SUCCESS - items left: %d", item.getInventory()), HttpStatus.OK);
+        } catch (OutOfStokException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
 }

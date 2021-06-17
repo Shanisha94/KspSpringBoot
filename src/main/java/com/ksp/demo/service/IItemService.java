@@ -1,5 +1,6 @@
 package com.ksp.demo.service;
 
+import com.ksp.demo.exception.OutOfStokException;
 import com.ksp.demo.model.Item;
 import java.util.List;
 import java.util.Optional;
@@ -14,4 +15,6 @@ public interface IItemService {
     void delete(long id);
 
     Item update(long itemId, Item item);
+
+    Item buyItem(long itemId, int amount) throws OutOfStokException;
 }
