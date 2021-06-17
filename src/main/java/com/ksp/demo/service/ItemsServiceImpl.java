@@ -51,10 +51,14 @@ public class ItemsServiceImpl implements IItemService {
     @Override
     public Item update(long itemId, Item item) {
         Item itemFromDb = itemRepository.findById(itemId).get();
-        itemFromDb.setName(item.getName());
-        itemFromDb.setDescription(item.getDescription());
-        itemFromDb.setInventory(item.getInventory());
-        itemFromDb.setPrice(item.getPrice());
+        if(item.getName() != null)
+            itemFromDb.setName(item.getName());
+        if(item.getDescription() != null)
+            itemFromDb.setDescription(item.getDescription());
+        if(item.getInventory() != 0)
+            itemFromDb.setInventory(item.getInventory());
+        if(item.getPrice() != 0)
+            itemFromDb.setPrice(item.getPrice());
         return itemRepository.save(itemFromDb);
     }
 
